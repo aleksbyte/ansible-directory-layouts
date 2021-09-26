@@ -1,32 +1,33 @@
-[01;34m.[00m
+```
+.
 ├── README.md
-├── [01;34mbasic[00m
+├── basic
 │   ├── README.md
 │   ├── ansible.cfg
-│   ├── [01;34mfiles[00m
+│   ├── files
 │   ├── inventory.yml
 │   ├── site.yml
-│   ├── [01;34mtasks[00m
-│   └── [01;34mvars[00m
-└── [01;34mbasic-plus[00m
+│   ├── tasks
+│   └── vars
+└── mbasic-plus
     ├── README.md
     ├── ansible.cfg
-    ├── [01;34mdefaults[00m
+    ├── mdefaults
     │   └── main.yml
-    ├── [01;34mfiles[00m
-    ├── [01;34mhandlers[00m
+    ├── files
+    ├── handlers
     │   └── main.yml
     ├── inventory.yml
-    ├── [01;34mmeta[00m
+    ├── meta
     │   └── main.yml
     ├── site.yml
-    ├── [01;34mtasks[00m
+    ├── tasks
     │   └── main.yml
-    ├── [01;34mtemplates[00m
-    ├── [01;34mtests[00m
+    ├── templates
+    ├── tests
     │   ├── inventory
     │   └── test.yml
-    └── [01;34mvars[00m
+    └── mvars
         └── main.yml
-
+```
 13 directories, 16 files
