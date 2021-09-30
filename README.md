@@ -9,7 +9,7 @@
 │   ├── site.yml
 │   ├── tasks
 │   └── vars
-└── mbasic-plus
+└── basic-plus
     ├── README.md
     ├── ansible.cfg
     ├── mdefaults
