@@ -43,3 +43,7 @@ Explain Ansible directories
         └── main.yml
 ```
 13 directories, 16 files
+
+Git clone any sub-directories ( use ghclone https://github.com/HR/github-clone). Example:
+  ghclone https://github.com/aleksbyte/ansible-directory-layouts/tree/main/basic-plus
+  ghclone https://github.com/aleksbyte/ansible-directory-layouts/tree/main/basic && mv basic myplaytest
