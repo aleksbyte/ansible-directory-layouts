@@ -10,6 +10,7 @@ Explain Ansible directories
                These variables can be defined in ansible playbook.
 
 ```
+```
 .
 ├── README.md
 ├── basic
@@ -42,6 +43,7 @@ Explain Ansible directories
     ├── tests
     └── vars
 ```
+
 ```
 13 directories, 16 files
 
