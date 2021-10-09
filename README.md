@@ -8,42 +8,46 @@ Explain Ansible directories
 - meta:     Defines metadata for this role. it contains file role dependencies.
 - vars:     This directory consists of other variables that used by the roles.
                These variables can be defined in ansible playbook.
-```
 
 ```
 .
 ├── README.md
 ├── basic
+│   ├── .ansible-lint
+│   ├── .gitignore
+│   ├── .yamllint
 │   ├── README.md
 │   ├── ansible.cfg
 │   ├── files
 │   ├── inventory.yml
+│   ├── requirements.yml
 │   ├── site.yml
 │   ├── tasks
 │   └── vars
 └── basic-plus
+    ├── .ansible-lint
+    ├── .gitignore
+    ├── .yamllint
     ├── README.md
     ├── ansible.cfg
     ├── defaults
-    │   └── main.yml
     ├── files
     ├── handlers
-    │   └── main.yml
     ├── inventory.yml
-    ├── meta
-    │   └── main.yml
+    ├── mmeta
+    ├── requirements.yml
     ├── site.yml
     ├── tasks
-    │   └── main.yml
     ├── templates
     ├── tests
-    │   ├── inventory
-    │   └── test.yml
     └── vars
-        └── main.yml
+```
 ```
 13 directories, 16 files
 
 Git clone any sub-directories ( use ghclone https://github.com/HR/github-clone). Example:
   ghclone https://github.com/aleksbyte/ansible-directory-layouts/tree/main/basic-plus
   ghclone https://github.com/aleksbyte/ansible-directory-layouts/tree/main/basic && mv basic myplaytest
+
+```
+9 directories, 26 files
