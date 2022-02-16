@@ -1,0 +1,69 @@
+#
+# #1: Creates  user on remote node using user module and password in /tmp/password
+# #2: Add ansible user to sudoers file using lineinfile module
+# #3: Adds SSH authorized keys for "ansible" user accounts using authorized_key module
+#
+#  TODO: user password generation improve ..
+#  https://stackoverflow.com/questions/19292899/creating-a-new-user-and-password-with-ansible
+#
+#  ansible-playbook --limit=airone ansible-client-remote-user-init.yml
+#  ansible-playbook add-remote-usr --limit=airone --tags=sudo,cpid
+#  ansible all -m ping -u ansible
+#  ansible all -m ping -u ansible --become
+
+- name: Initial setup of ansible client RH node
+  hosts: all
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  vars:
+    remote_user: root
+#    remote_user: ?????
+    mgmt_ansible_login: ansible
+
+    remote_user_password: "{{ lookup('password', '/tmp/password chars=ascii_letters') }}"
+    remote_group: wheel
+    ansible_connection: ssh
+
+  vars_prompt:
+    - name: "ansible_ssh_pass"
+      prompt: "Password for remote connection ( {{ remote_user }} )?"
+      private: yes
+    - name: "mgmt_ansible_user_password"
+      prompt: "Remote_ansible_mgmt_user_password ( {{ mgmt_ansible_login }} )?"
+      private: yes
+
+  tasks:
+    - name: #1. Create Ansible Management Account
+      ansible.builtin.user:
+        name: "{{ mgmt_ansible_login }}"
+        password: "{{ mgmt_ansible_user_password | password_hash('sha512','A512') }}"
+        shell: /bin/bash
+        groups: "{{ remote_group }}"
+        append: true
+        create_home: true
+        comment: "Ansible Management Account"
+        state: present
+
+    - name: #2. Add Sudo Access
+      lineinfile:
+        path: "/etc/sudoers.d/{{ mgmt_ansible_login }}"
+        line: "{{ mgmt_ansible_login }}   ALL=(ALL)   NOPASSWD: ALL"
+        create: true
+        mode: 0440
+        state: present
+        validate: "visudo -cf %s"
+#      tags:
+#        - sudo
+#        - never
+
+    - name: #3. Populate SSH Key
+      ansible.posix.authorized_key:
+        user: "{{ mgmt_ansible_login }}"
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        state: present
+#      tags:
+#        - cpid
+#        - never
+...
